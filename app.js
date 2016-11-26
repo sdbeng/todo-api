@@ -16,9 +16,18 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   console.log('Successfully connected to mongodb server.');
 
   //fetch todos - use promises
-  db.collection('Todos').find({}).toArray().then((docs) => {
+  // db.collection('Todos').find({}).toArray().then((docs) => {
+  //   console.log('***Todos list***');
+  //   console.log(JSON.stringify(docs, undefined, 2));
+  // }, (err) => {
+  //   console.log('Unable to fetch todos, err');
+  // })
+
+  //call count
+  db.collection('Todos').find({}).count().then((count) => {
     console.log('***Todos list***');
-    console.log(JSON.stringify(docs, undefined, 2));
+    console.log(`Todos count: ${count}`);
+
   }, (err) => {
     console.log('Unable to fetch todos, err');
   })
