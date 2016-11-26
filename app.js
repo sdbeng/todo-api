@@ -16,7 +16,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   //insert a doc into the Todos collection (by default: the database won't show if
   //there is no existing doc in there)
   db.collection('Todos').insertOne({
-    title:'Buy orange juice',
+    title:'Work on Day 5 activities',
     completed: false
   }, (err, result) => {
     if(err){
