@@ -1,14 +1,19 @@
 console.log('Starting app');
 const express = require('express')
+const path = require('path')
+//create express instance
+const app = express()
+
 const engines = require('consolidate')
 const bodyParser = require('body-parser')
 // const MongoClient = require('mongodb').MongoClient;
 //ES6 destructuring
 const {MongoClient} = require('mongodb');
 
+app.use(express.static(path.join(__dirname, 'views')))
 
-//create express instance
-const app = express()
+app.use(bodyParser.urlencoded({extended: true}))
+
 //connect to db server and create the TodoApp database
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   if(err){
@@ -48,7 +53,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 
   //get route
   app.get('/', (req, res) => {
-    res.render()
+    res.render('index.html')
   })
 
   //web server listen
