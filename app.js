@@ -1,6 +1,7 @@
 console.log('Starting app');
 const express = require('express')
 const engines = require('consolidate')
+const bodyParser = require('body-parser')
 // const MongoClient = require('mongodb').MongoClient;
 //ES6 destructuring
 const {MongoClient} = require('mongodb');
@@ -24,13 +25,13 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   // })
 
   //call count
-  db.collection('Todos').find({}).count().then((count) => {
-    console.log('***Todos list***');
-    console.log(`Todos count: ${count}`);
-
-  }, (err) => {
-    console.log('Unable to fetch todos, err');
-  })
+  // db.collection('Todos').find({}).count().then((count) => {
+  //   console.log('***Todos list***');
+  //   console.log(`Todos count: ${count}`);
+  //
+  // }, (err) => {
+  //   console.log('Unable to fetch todos, err');
+  // })
 
 
   //insert a doc into the Todos collection (by default: the database won't show if
@@ -44,6 +45,16 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   //   }
   //   console.log(JSON.stringify(result.ops, undefined, 2));
   // })
+
+  //get route
+  app.get('/', (req, res) => {
+    res.render()
+  })
+
+  //web server listen
+  app.listen(3005, () => {
+    console.log('express server listening on port 3005...');
+  })
 
   // db.close(); //commented out to not interfere when fetching todos
 })
