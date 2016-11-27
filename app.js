@@ -41,15 +41,15 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 
   //insert a doc into the Todos collection (by default: the database won't show if
   //there is no existing doc in there)
-  // db.collection('Todos').insertOne({
-  //   title:'Work on Day 5 activities',
-  //   completed: false
-  // }, (err, result) => {
-  //   if(err){
-  //     return console.log('Unable to insert todo', err);
-  //   }
-  //   console.log(JSON.stringify(result.ops, undefined, 2));
-  // })
+  db.collection('Todos').insertOne({
+    title:'Work on mongodb homework',
+    completed: false
+  }, (err, result) => {
+    if(err){
+      return console.log('Unable to insert todo', err);
+    }
+    console.log(JSON.stringify(result.ops, undefined, 2));
+  })
 
   //get route
   app.get('/', (req, res) => {
