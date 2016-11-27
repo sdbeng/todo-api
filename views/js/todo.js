@@ -20,6 +20,9 @@ function go(){
 
 		var item = document.createElement('li');
 		item.innerText = text;
+
+    var buttons = document.createElement('div');
+		buttons.classList.add('buttons');
   }
 
   //
