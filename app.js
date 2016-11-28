@@ -6,9 +6,10 @@ const app = express()
 
 const engines = require('consolidate')
 const bodyParser = require('body-parser')
+
 // const MongoClient = require('mongodb').MongoClient;
 //ES6 destructuring
-const {MongoClient} = require('mongodb');
+const {MongoClient, ObjectID} = require('mongodb');
 
 app.use(express.static(path.join(__dirname, 'views')))
 
@@ -28,6 +29,13 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
   // }, (err) => {
   //   console.log('Unable to fetch todos, err');
   // })
+  //fetch single todos - by id - check syntax carefully!!
+  db.collection('Todos').find({_id:new ObjectID('583bbe56ed2df9081508bfc2')}).toArray().then((docs) => {
+    console.log('***Find Todo by a id***');
+    console.log(JSON.stringify(docs, undefined, 2));
+  }, (err) => {
+    console.log('Unable to fetch todos, err');
+  })
 
   //call count
   // db.collection('Todos').find({}).count().then((count) => {
@@ -41,15 +49,15 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 
   //insert a doc into the Todos collection (by default: the database won't show if
   //there is no existing doc in there)
-  db.collection('Todos').insertOne({
-    title:'Work on mongodb homework',
-    completed: false
-  }, (err, result) => {
-    if(err){
-      return console.log('Unable to insert todo', err);
-    }
-    console.log(JSON.stringify(result.ops, undefined, 2));
-  })
+  // db.collection('Todos').insertOne({
+  //   title:'Work on mongodb homework',
+  //   completed: false
+  // }, (err, result) => {
+  //   if(err){
+  //     return console.log('Unable to insert todo', err);
+  //   }
+  //   console.log(JSON.stringify(result.ops, undefined, 2));
+  // })
 
   //get route
   app.get('/', (req, res) => {
